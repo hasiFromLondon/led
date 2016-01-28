@@ -1,0 +1,14 @@
+#!/bin/bash
+
+FIFO_TO_SERVER_NAME=/tmp/led_from_client_fifo
+FIFO_TO_CLIENT_NAME=/tmp/led_to_client_fifo
+
+RR=4
+
+cat ${FIFO_TO_CLIENT_NAME} &
+
+while read line; do
+  echo sss1
+  echo "${line}" > ${FIFO_TO_SERVER_NAME}
+  echo sss2	
+done < /dev/stdin
