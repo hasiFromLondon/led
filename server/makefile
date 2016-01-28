@@ -1,4 +1,4 @@
-TARGET = ledserver
+TARGET = server
 
 CC = g++
 

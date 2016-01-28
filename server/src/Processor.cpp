@@ -62,18 +62,20 @@ void Processor::HandleGetLedColor(const std::string& arg)
 
 void Processor::HandleSetLedRate(const std::string& arg)
 {
+    bool  error = false;
     try
     {
         int rate = std::stoi(arg);
         if ( rate >= 0 && rate < 6)
             m_led.SetFreq(rate);
         else
-            SendAnswer(true);
+            error = true;
     }
     catch (std::exception& ex)
     {
-        SendAnswer(true);
+        error = true;
     }
+    SendAnswer(error);
 }
 
 void Processor::HandleGetLedRate(const std::string& arg)
@@ -98,17 +100,13 @@ void Processor::SendAnswer(bool error, const std::string& result)
         }
     }
     m_server.Send(answer);
-    //std::cout << answer << std::endl;
 }
 
 void Processor::ProcessCommand(const std::string& command, const std::string& arg)
 {
-    std::cout << "ProcessCommand" << std::endl;
-
     auto p = m_commands.find(command);
     if ( p == m_commands.end() )
     {
-        std::cout << "ProcessCommand 3 "  << std::endl;
         SendAnswer(true);
     }
     else
@@ -128,7 +126,6 @@ void Processor::HandleServerData(const std::string& data)
     std::string command;
     std::string arg;
 
-    std::cout << "HandleServerData" << std::endl;
     m_client_command += data;
 
     auto rn = m_client_command.find('\n');

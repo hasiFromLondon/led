@@ -37,7 +37,6 @@ class Processor
         Server m_server;
         Led    m_led;
         std::string m_client_command;
-
         CommandList m_commands;
 };
 

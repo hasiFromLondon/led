@@ -50,7 +50,6 @@ std::string Led::GetRate()
 
 void Led::Thread()
 {
-
     bool blink_state = false;
 
     while (1)
@@ -64,7 +63,6 @@ void Led::Thread()
 
                 break;
             case State::on:
-
                 if (!m_freq)
                 {
                     std::cout << "on, " << m_colors[static_cast<int>(m_color)] << std::flush;
@@ -78,7 +76,6 @@ void Led::Thread()
                         std::cout << "off, " << m_colors[static_cast<int>(m_color)] << std::flush;
                     blink_state = !blink_state;
                     int time = 1000/m_freq;
-                  //  std::cout << "time = " << time << std::endl;
                     std::this_thread::sleep_for(std::chrono::milliseconds(time));
 
                 }

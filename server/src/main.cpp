@@ -18,8 +18,5 @@ int main()
     catch (std::exception& ex)
     {
         std::cerr << "Exception: " << ex.what() << std::endl;
-
     }
-    std::cout << "Start" << std::endl;
-
 }
